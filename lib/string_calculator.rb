@@ -1,6 +1,11 @@
 class StringCalculator
     def self.add(numbers)
         return 0 if numbers.empty?
-        numbers.split(/,|\n/).map(&:to_i).sum
+        delimeter = /,|\n/
+        if numbers.start_with?("//")
+            delimeter = Regexp.escape(numbers[2])
+            numbers = numbers[4..-1]
+        end
+        numbers.split(/#{delimeter}/).map(&:to_i).sum
     end
 end
